@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pandas
+ydata-profiling
+sweetviz
+matplotlib
+seaborn
+Jinja2
+httpx
