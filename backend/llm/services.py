@@ -37,11 +37,11 @@ class LLMClient:
         
         if llm_choice == "deepseek":
             headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
-            data = {"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}]}
+            data = {"model": "deepseek-reasoner", "messages": [{"role": "user", "content": prompt}]}
             response_data = await self._call_api(self.deepseek_url, headers, data)
         elif llm_choice == "chataiapi":
             headers = {"Authorization": f"Bearer {CHATAIAPI_API_KEY}", "Content-Type": "application/json"}
-            data = {"model": "default-model", "messages": [{"role": "user", "content": prompt}]} # Assuming a default model
+            data = {"model": "gemini-2.5-pro", "messages": [{"role": "user", "content": prompt}]} # Assuming a default model
             response_data = await self._call_api(self.chataiapi_url, headers, data)
         else:
             return {"error": "Invalid LLM choice"}

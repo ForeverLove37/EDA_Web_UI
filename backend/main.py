@@ -6,7 +6,7 @@ import sweetviz as sv
 import io
 import matplotlib.pyplot as plt
 import base64
-from backend.llm.services import llm_client
+from llm.services import llm_client
 
 app = FastAPI()
 
