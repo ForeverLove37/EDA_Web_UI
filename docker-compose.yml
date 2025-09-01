@@ -1,0 +1,15 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DEEPSEEK_API_KEY=DEEPSEEK_API_KEY_PLACEHOLDER
+      - CHATAIAPI_API_KEY=CHATAIAPI_API_KEY_PLACEHOLDER
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "6000:80"
+    depends_on:
+      - backend
