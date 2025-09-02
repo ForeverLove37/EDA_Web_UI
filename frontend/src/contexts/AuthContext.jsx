@@ -1,19 +1,44 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-
-const AuthContext = createContext({})
-
-export const useAuth = () => {
-  const context = useContext(AuthContext)
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider')
-  }
-  return context
-}
+import { AuthContext } from './AuthContextInstance'
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme')
+    return savedTheme || 'dark'
+  })
+
+  // Add response interceptor to handle token expiration
+  useEffect(() => {
+    const responseInterceptor = axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response?.status === 401) {
+          console.log('Token expired, redirecting to login')
+          // Token expired, logout user
+          logout()
+          // Redirect to login page
+          window.location.href = '/login'
+        }
+        return Promise.reject(error)
+      }
+    )
+
+    return () => {
+      axios.interceptors.response.eject(responseInterceptor)
+    }
+  }, [])
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -76,7 +101,9 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
-    loading
+    loading,
+    theme,
+    toggleTheme
   }
 
   return (

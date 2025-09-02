@@ -24,7 +24,7 @@ const AnalysisDashboard = ({ projectId, analyses, dataSources, onUpdate }) => {
     try {
       const response = await axios.post(`/projects/${projectId}/analyze`, {
         name: `${analysisType} Analysis`,
-        analysis_type: analysis_type,
+        analysis_type: analysisType,
         parameters: {}
       })
 

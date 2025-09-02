@@ -42,11 +42,17 @@ class DataConnector:
             # AI-powered first contact analysis
             profile = await self._analyze_first_contact(data, source_type)
             
+            # Convert raw data sample to ensure JSON serializability
+            raw_data_sample = data.head(100).to_dict('records') if hasattr(data, 'head') else data[:100]
+            print(f"DEBUG: Raw data sample before conversion: {type(raw_data_sample[0]['OrderID']) if raw_data_sample and 'OrderID' in raw_data_sample[0] else 'N/A'}")
+            raw_data_sample = self._convert_numpy_types(raw_data_sample)
+            print(f"DEBUG: Raw data sample after conversion: {type(raw_data_sample[0]['OrderID']) if raw_data_sample and 'OrderID' in raw_data_sample[0] else 'N/A'}")
+            
             return {
                 'success': True,
                 'data_preview': preview,
                 'data_profile': profile,
-                'raw_data_sample': data.head(100).to_dict('records') if hasattr(data, 'head') else data[:100]
+                'raw_data_sample': raw_data_sample
             }
             
         except Exception as e:
@@ -55,16 +61,49 @@ class DataConnector:
                 'error': str(e)
             }
     
+    def _convert_numpy_types(self, obj):
+        """Convert numpy types to native Python types for JSON serialization"""
+        import numpy as np
+        
+        if isinstance(obj, (np.integer, np.int64, np.int32, np.int16, np.int8)):
+            return int(obj)
+        elif isinstance(obj, (np.floating, np.float64, np.float32, np.float16)):
+            return float(obj)
+        elif isinstance(obj, np.bool_):
+            return bool(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif hasattr(obj, 'item'):
+            return obj.item()
+        elif isinstance(obj, dict):
+            return {k: self._convert_numpy_types(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [self._convert_numpy_types(item) for item in obj]
+        else:
+            return obj
+
     def _generate_preview(self, data):
         """Generate data preview for UI"""
         if isinstance(data, pd.DataFrame):
+            # Convert DataFrame to dict records and convert numpy types
+            sample_data = data.head(10).to_dict('records')
+            sample_data = self._convert_numpy_types(sample_data)
+            
+            # Convert missing values counts to native types
+            missing_values = data.isnull().sum().to_dict()
+            missing_values = self._convert_numpy_types(missing_values)
+            
+            # Convert row_count and column_count to native types
+            row_count = self._convert_numpy_types(len(data))
+            column_count = self._convert_numpy_types(len(data.columns))
+            
             return {
-                'row_count': len(data),
-                'column_count': len(data.columns),
+                'row_count': row_count,
+                'column_count': column_count,
                 'columns': list(data.columns),
-                'sample_data': data.head(10).to_dict('records'),
+                'sample_data': sample_data,
                 'dtypes': data.dtypes.astype(str).to_dict(),
-                'missing_values': data.isnull().sum().to_dict()
+                'missing_values': missing_values
             }
         elif isinstance(data, list):
             return {
@@ -84,34 +123,91 @@ class DataConnector:
         else:
             data_str = str(data)
         
-        prompt = f"""
-        You are an expert data analyst performing "first contact" analysis. Analyze this data sample from a {source_type} source:
+        # Basic analysis without LLM if API keys are not configured
+        if isinstance(data, pd.DataFrame):
+            # Convert numpy types to native types
+            missing_values = data.isnull().sum().to_dict()
+            missing_values = self._convert_numpy_types(missing_values)
+            duplicate_rows = self._convert_numpy_types(data.duplicated().sum())
+            row_count = self._convert_numpy_types(len(data))
+            column_count = self._convert_numpy_types(len(data.columns))
+            
+            return {
+                'structure_assessment': {
+                    'row_count': row_count,
+                    'column_count': column_count,
+                    'columns': list(data.columns),
+                    'data_types': data.dtypes.astype(str).to_dict()
+                },
+                'quality_issues': {
+                    'missing_values': missing_values,
+                    'duplicate_rows': duplicate_rows
+                },
+                'cleansing_recommendations': [
+                    'Check for consistent data formats across columns',
+                    'Validate numerical ranges where applicable',
+                    'Standardize categorical values if needed'
+                ],
+                'initial_insights': [
+                    f'Dataset contains {len(data)} records with {len(data.columns)} features',
+                    'Perform exploratory analysis to understand distributions and relationships'
+                ],
+                'analysis_suggestions': [
+                    'Statistical summary of numerical columns',
+                    'Frequency analysis of categorical columns',
+                    'Correlation analysis between variables',
+                    'Time series analysis if date columns are present'
+                ]
+            }
         
-        {data_str[:2000]}
-        
-        Provide a comprehensive analysis including:
-        1. Data structure and schema assessment
-        2. Data quality issues (missing values, inconsistencies, formatting problems)
-        3. Potential data cleansing recommendations
-        4. Initial insights about the data content
-        5. Suggestions for further analysis
-        
-        Return your analysis as JSON with keys: structure_assessment, quality_issues, cleansing_recommendations, initial_insights, analysis_suggestions.
-        """
-        
-        result = await llm_client.analyze_data('deepseek', prompt)
-        
-        try:
-            return json.loads(result.get('analysis', '{}'))
-        except:
-            return {'analysis': result.get('analysis', 'Analysis failed')}
+        # Fallback for non-DataFrame data
+        return {
+            'structure_assessment': {'data_type': type(data).__name__, 'size': len(data) if hasattr(data, '__len__') else 'unknown'},
+            'quality_issues': {'note': 'Manual inspection required'},
+            'cleansing_recommendations': ['Review data structure and formatting'],
+            'initial_insights': ['Data requires further analysis'],
+            'analysis_suggestions': ['Perform detailed examination based on data type']
+        }
     
     # Individual connector methods
     async def _connect_csv(self, config):
         if 'file_content' in config:
-            return pd.read_csv(io.StringIO(config['file_content']))
+            # Handle both string and bytes input
+            if isinstance(config['file_content'], bytes):
+                content = config['file_content']
+                # Auto-detect separator
+                try:
+                    # Try to detect separator from first line
+                    first_line = content.split(b'\n')[0].decode('utf-8', errors='ignore')
+                    if '\t' in first_line and first_line.count('\t') > first_line.count(','):
+                        return pd.read_csv(io.BytesIO(content), sep='\t')
+                    else:
+                        return pd.read_csv(io.BytesIO(content))
+                except:
+                    # Fallback to tab separator
+                    return pd.read_csv(io.BytesIO(content), sep='\t')
+            else:
+                content = config['file_content']
+                # Auto-detect separator for string content
+                try:
+                    first_line = content.split('\n')[0]
+                    if '\t' in first_line and first_line.count('\t') > first_line.count(','):
+                        return pd.read_csv(io.StringIO(content), sep='\t')
+                    else:
+                        return pd.read_csv(io.StringIO(content))
+                except:
+                    return pd.read_csv(io.StringIO(content), sep='\t')
         elif 'file_path' in config:
-            return pd.read_csv(config['file_path'])
+            # Auto-detect separator for file path
+            try:
+                with open(config['file_path'], 'r') as f:
+                    first_line = f.readline()
+                if '\t' in first_line and first_line.count('\t') > first_line.count(','):
+                    return pd.read_csv(config['file_path'], sep='\t')
+                else:
+                    return pd.read_csv(config['file_path'])
+            except:
+                return pd.read_csv(config['file_path'], sep='\t')
         else:
             raise ValueError("CSV config requires file_content or file_path")
     

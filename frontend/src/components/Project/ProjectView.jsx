@@ -65,17 +65,17 @@ const ProjectView = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">{project.name}</h2>
-          <p className="text-gray-600">{project.description}</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{project.name}</h2>
+          <p className="text-gray-600 dark:text-gray-400">{project.description}</p>
         </div>
         
         <div className="flex items-center space-x-4">
-          <button className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+          <button className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors">
             <Play size={16} />
             <span>Run Analysis</span>
           </button>
           
-          <button className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+          <button className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
             <Download size={16} />
             <span>Export</span>
           </button>
@@ -84,49 +84,49 @@ const ProjectView = () => {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
+        <div className="card p-4">
           <div className="flex items-center space-x-3">
             <Database className="text-blue-600" size={20} />
             <div>
-              <h3 className="text-xl font-bold">{project.data_sources?.length || 0}</h3>
-              <p className="text-gray-600 text-sm">Data Sources</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{project.data_sources?.length || 0}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Data Sources</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
+        <div className="card p-4">
           <div className="flex items-center space-x-3">
             <BarChart3 className="text-green-600" size={20} />
             <div>
-              <h3 className="text-xl font-bold">{project.analyses?.length || 0}</h3>
-              <p className="text-gray-600 text-sm">Analyses</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{project.analyses?.length || 0}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Analyses</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
+        <div className="card p-4">
           <div className="flex items-center space-x-3">
             <MessageSquare className="text-purple-600" size={20} />
             <div>
-              <h3 className="text-xl font-bold">{project.analyses?.reduce((acc, a) => acc + (a.insights?.length || 0), 0) || 0}</h3>
-              <p className="text-gray-600 text-sm">Insights</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{project.analyses?.reduce((acc, a) => acc + (a.insights?.length || 0), 0) || 0}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Insights</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-4 rounded-lg shadow-sm border">
+        <div className="card p-4">
           <div className="flex items-center space-x-3">
             <FileText className="text-orange-600" size={20} />
             <div>
-              <h3 className="text-xl font-bold">{project.stories?.length || 0}</h3>
-              <p className="text-gray-600 text-sm">Stories</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{project.stories?.length || 0}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">Stories</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-gray-200 dark:border-dark-700">
         <nav className="-mb-px flex space-x-8">
           {tabs.map((tab) => {
             const Icon = tab.icon
@@ -138,8 +138,8 @@ const ProjectView = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm ${
                   isActive
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-dark-600'
                 }`}
               >
                 <Icon size={18} />

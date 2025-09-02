@@ -1,0 +1,101 @@
+OrderID	CustomerID	Category	Product	Price	Quantity	OrderDate	Country
+1	C8258	Electronics	Headphones	199.99	1	7/25/2023	Poland
+2	C3493	Books	Cookbook	32	1	6/21/2024	Isle of Man
+3	C9478	Clothing	Jeans	75.5	5	1/14/2024	Saint Barthelemy
+4	C1112	Clothing	Jeans	75.5	1	8/3/2024	Austria
+5	C1022	Books	History of Art	55	3	3/4/2023	Palau
+6	C6671	Books	Science Fiction Novel	15.5	4	11/19/2023	Ghana
+7	C4322	Books	Science Fiction Novel	15.5	2	5/9/2024	Brazil
+8	C9110	Books	Science Fiction Novel	15.5	3	1/16/2023	Russian Federation
+9	C8230	Clothing	Jeans	75.5	3	4/23/2024	Bermuda
+10	C4324	Electronics	Headphones	199.99	3	4/22/2023	Indonesia
+11	C9034	Clothing	T-Shirt	25	1	9/28/2023	Cambodia
+12	C2453	Clothing	T-Shirt	25	3	6/18/2023	Vietnam
+13	C7580	Books	History of Art	55	2	12/20/2023	Armenia
+14	C7606	Home Goods	Coffee Maker	89.99	1	1/26/2024	Qatar
+15	C6545	Electronics	Headphones	199.99	1	1/30/2024	Kuwait
+16	C9205	Home Goods	Coffee Maker	89.99	5	11/9/2023	China
+17	C3278	Electronics	Laptop	1200	2	5/20/2023	United States of America
+18	C7293	Books	History of Art	55	1	1/4/2024	Northern Mariana Islands
+19	C9269	Electronics	Smartphone	799.99	5	6/11/2024	Bahrain
+20	C1061	Home Goods	Coffee Maker	89.99	4	2/29/2024	Armenia
+21	C6225	Clothing	T-Shirt	25	2	4/28/2023	South Georgia and the South Sandwich Islands
+22	C4840	Electronics	Laptop	1200	1	1/2/2023	Cook Islands
+23	C9544	Electronics	Headphones	199.99	4	5/16/2023	Iraq
+24	C2319	Home Goods	Coffee Maker	89.99	1	1/2/2023	Qatar
+25	C2645	Electronics	Smartphone	799.99	5	11/3/2023	Jersey
+26	C4474	Clothing	T-Shirt	25	4	1/25/2023	Papua New Guinea
+27	C8651	Electronics	Laptop	1200	1	10/11/2023	Italy
+28	C1443	Clothing	T-Shirt	25	4	12/5/2023	American Samoa
+29	C5663	Electronics	Headphones	199.99	3	12/30/2023	United Kingdom
+30	C6529	Clothing	T-Shirt	25	4	3/18/2024	Morocco
+31	C4747	Home Goods	Blender	120	1	2/15/2023	Korea
+32	C3861	Clothing	Jeans	75.5	2	7/24/2023	Guyana
+33	C8122	Books	History of Art	55	3	4/7/2024	Nicaragua
+34	C6815	Clothing	T-Shirt	25	5	3/17/2024	Bangladesh
+35	C4321	Books	Science Fiction Novel	15.5	1	8/2/2023	Gabon
+36	C4807	Books	Cookbook	32	5	11/13/2023	Falkland Islands (Malvinas)
+37	C2614	Clothing	Jeans	75.5	5	7/28/2023	Uganda
+38	C8363	Electronics	Smartphone	799.99	5	6/16/2024	Cook Islands
+39	C1728	Home Goods	Coffee Maker	89.99	2	8/4/2023	Cocos (Keeling) Islands
+40	C1897	Electronics	Headphones	199.99	4	5/4/2024	Hong Kong
+41	C8789	Books	History of Art	55	4	1/22/2023	Colombia
+42	C6788	Home Goods	Coffee Maker	89.99	5	3/7/2023	Cocos (Keeling) Islands
+43	C7865	Clothing	T-Shirt	25	1	3/28/2023	Sudan
+44	C5188	Books	Science Fiction Novel	15.5	3	10/30/2023	Tonga
+45	C9410	Electronics	Headphones	199.99	2	11/27/2023	Philippines
+46	C3081	Home Goods	Blender	120	1	8/13/2024	Falkland Islands (Malvinas)
+47	C3550	Clothing	T-Shirt	25	3	7/10/2023	Macao
+48	C2195	Books	Cookbook	32	2	8/2/2024	Malawi
+49	C5804	Clothing	T-Shirt	25	3	6/13/2024	Canada
+50	C7030	Home Goods	Blender	120	3	6/30/2024	Russian Federation
+51	C7413	Home Goods	Blender	120	4	7/2/2023	Anguilla
+52	C7885	Books	Cookbook	32	1	7/10/2023	Czech Republic
+53	C4670	Books	History of Art	55	2	4/12/2024	Greece
+54	C2221	Electronics	Smartphone	799.99	1	2/26/2023	Iraq
+55	C9797	Books	Science Fiction Novel	15.5	1	1/22/2024	Tokelau
+56	C7093	Electronics	Headphones	199.99	5	8/20/2024	Palau
+57	C9806	Electronics	Smartphone	799.99	4	6/10/2024	Azerbaijan
+58	C5275	Home Goods	Coffee Maker	89.99	1	12/23/2023	Zambia
+59	C9305	Books	Cookbook	32	1	4/9/2024	Madagascar
+60	C6813	Electronics	Headphones	199.99	3	2/1/2023	Yemen
+61	C2583	Electronics	Laptop	1200	2	8/15/2024	Ireland
+62	C5298	Electronics	Smartphone	799.99	2	4/20/2023	Maldives
+63	C3061	Electronics	Headphones	199.99	1	3/31/2024	Kazakhstan
+64	C5687	Electronics	Headphones	199.99	1	10/4/2023	Antigua and Barbuda
+65	C3723	Books	Cookbook	32	2	7/28/2024	Kuwait
+66	C8722	Electronics	Headphones	199.99	5	7/6/2023	Czech Republic
+67	C4311	Books	Cookbook	32	5	1/8/2024	Philippines
+68	C2445	Clothing	T-Shirt	25	1	1/22/2023	Slovakia (Slovak Republic)
+69	C9069	Home Goods	Coffee Maker	89.99	2	4/8/2024	Cuba
+70	C7354	Clothing	T-Shirt	25	4	2/15/2024	Bulgaria
+71	C8942	Home Goods	Blender	120	1	1/14/2024	Holy See (Vatican City State)
+72	C3574	Electronics	Headphones	199.99	1	11/3/2023	Samoa
+73	C7822	Electronics	Headphones	199.99	1	10/28/2023	Macao
+74	C2781	Books	History of Art	55	3	5/20/2024	Tajikistan
+75	C7583	Electronics	Smartphone	799.99	5	7/6/2023	French Polynesia
+76	C3315	Home Goods	Coffee Maker	89.99	1	1/25/2023	Niue
+77	C5528	Electronics	Laptop	1200	1	8/22/2024	Samoa
+78	C3372	Electronics	Laptop	1200	2	4/26/2024	Papua New Guinea
+79	C7347	Clothing	Jeans	75.5	3	1/31/2023	Singapore
+80	C7490	Home Goods	Blender	120	3	12/8/2023	Bahrain
+81	C3103	Electronics	Headphones	199.99	4	1/25/2024	Bahamas
+82	C7338	Clothing	Jeans	75.5	2	5/14/2024	Mauritius
+83	C6963	Books	History of Art	55	1	11/1/2023	Niue
+84	C1368	Electronics	Smartphone	799.99	3	2/22/2024	Gabon
+85	C9187	Books	Cookbook	32	5	12/3/2023	Greenland
+86	C6591	Home Goods	Coffee Maker	89.99	1	6/28/2023	Anguilla
+87	C4930	Electronics	Smartphone	799.99	2	8/15/2023	Saint Helena
+88	C2091	Books	Science Fiction Novel	15.5	2	9/5/2023	Lesotho
+89	C7294	Home Goods	Blender	120	1	8/12/2024	Croatia
+90	C3534	Clothing	Jeans	75.5	1	4/7/2023	Montserrat
+91	C8287	Books	History of Art	55	3	8/1/2023	French Southern Territories
+92	C7739	Home Goods	Coffee Maker	89.99	4	9/15/2023	Maldives
+93	C3008	Books	History of Art	55	2	4/22/2024	Guernsey
+94	C4133	Electronics	Headphones	199.99	5	5/14/2023	Monaco
+95	C2625	Clothing	Jeans	75.5	1	8/6/2023	Bangladesh
+96	C8155	Clothing	Jeans	75.5	2	12/12/2023	Israel
+97	C3096	Clothing	T-Shirt	25	4	11/18/2023	Nauru
+98	C8265	Clothing	Jeans	75.5	5	5/3/2024	Saint Pierre and Miquelon
+99	C5489	Clothing	T-Shirt	25	2	2/17/2024	Saint Helena
+100	C8017	Books	Science Fiction Novel	15.5	5	8/23/2023	American Samoa

@@ -71,6 +71,13 @@ Backend requires these environment variables:
 - `DEEPSEEK_API_KEY`: API key for Deepseek LLM service
 - `CHATAIAPI_API_KEY`: API key for ChatAI API service
 
+## Default Admin Account
+
+A default admin account is available for testing:
+- **Email**: admin@phoenix.com
+- **Password**: Admin123!
+- **To recreate/reset**: Run `python3 create_admin.py` in the backend directory
+
 ## API Endpoints
 
 ### Authentication

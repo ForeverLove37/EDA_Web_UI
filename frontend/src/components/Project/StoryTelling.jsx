@@ -52,9 +52,26 @@ const StoryTelling = ({ projectId, stories, analyses, onUpdate }) => {
   }
 
   const exportStory = async (story, format) => {
-    // This would call a backend export endpoint
-    alert(`Exporting story as ${format}...`)
-    // Implement actual export functionality
+    try {
+      // Call backend export endpoint
+      const response = await axios.get(`/stories/${story.id}/export/${format}`, {
+        responseType: 'blob'
+      })
+      
+      // Create download link
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `${story.title}.${format}`)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
+      
+    } catch (error) {
+      console.error('Error exporting story:', error)
+      alert(`Failed to export story as ${format}. Please try again.`)
+    }
   }
 
   return (

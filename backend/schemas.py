@@ -109,7 +109,7 @@ class Story(BaseModel):
     project_id: int
     title: str
     narrative: str
-    components: Dict[str, Any]
+    components: List[Dict[str, Any]]
     export_formats: List[str]
     created_at: datetime
     
