@@ -4,8 +4,8 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DEEPSEEK_API_KEY=sk-5d832b2f7c0a4f1187c3c2c619c680f4
-      - CHATAIAPI_API_KEY=sk-kSN2ux4WdAPmpzUJX69qx6L51mlelE069TXKaWxIzhTyOoqg
+      - DEEPSEEK_API_KEY=DEEPSEEK_API_KEY_PLACEHOLDER
+      - CHATAIAPI_API_KEY=CHATAIAPI_API_KEY_PLACEHOLDER
 
   frontend:
     build: ./frontend
